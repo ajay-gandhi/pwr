@@ -1,0 +1,19 @@
+{
+  "name": "pwr",
+  "version": "0.0.1",
+  "description": "Power saver mode for Mac",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "keywords": [
+    "power",
+    "mac",
+    "saver"
+  ],
+  "author": "Ajay Gandhi",
+  "license": "ISC",
+  "dependencies": {
+    "configstore": "^2.0.0"
+  }
+}
