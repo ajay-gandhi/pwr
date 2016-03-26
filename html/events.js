@@ -5,6 +5,7 @@ var ipc   = require('electron').ipcRenderer,
 
 window.jQuery = window.$ = module.exports;
 
+// Local copy of apps to quit
 var all_apps = [];
 
 $(document).ready(function () {

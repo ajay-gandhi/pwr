@@ -88,7 +88,7 @@ app.on('ready', function () {
 /****************************** Battery Watching ******************************/
 
 var disable_func = function (stats) {
-  // if (stats.current * 1.0 / stats.max_cap < threshold) {
+  // if (stats.percent < threshold) {
     console.log('stopping:', all_apps);
     // Commented out because don't wanna quit anything for now
     // all_apps.forEach(function (app_name) {

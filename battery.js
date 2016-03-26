@@ -53,13 +53,12 @@ var stats = {};
 
 var new_bat_status = function (raw_data) {
   var lines = raw_data.toString().split('\n');
-  var num_regex = /\d+/;
   stats = {
-    current: parseInt(lines[0].match(num_regex)[0]),
-    max_cap: parseInt(lines[2].match(num_regex)[0]),
-    is_full: lines[1].indexOf('Yes') < 0 ? false : true
+    current: parseInt(lines[0]),
+    max_cap: parseInt(lines[2]),
+    is_full: lines[1].charAt(0) === 'Y' ? true : false
   };
-  stats.percent = stats.current / stats.max_cap;
+  stats.percent = stats.current * 1.0 / stats.max_cap;
 
   // Call all watch functions on data
   watch_functions.forEach(function (f) {
