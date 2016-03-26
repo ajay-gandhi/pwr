@@ -37,7 +37,13 @@ var main_window = null,
 app.dock.hide();
 
 app.on('ready', function () {
-  main_window = new BrowserWindow({ width: 500, height: 300 });
+  main_window = new BrowserWindow({
+    width: 500,
+    height: 300,
+    center: true,
+    resizable: false,
+    type: 'textured'
+  });
   main_window.loadURL('file://' + __dirname + '/html/index.html');
 
   // Immediately send current list of apps
@@ -97,7 +103,7 @@ var disable_func = function (stats) {
   // }
 }
 
-disable_wid = bat_watch.start(disable_func);
+// disable_wid = bat_watch.start(disable_func);
 
 /********************************* IPC Events *********************************/
 
