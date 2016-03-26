@@ -2,7 +2,7 @@
   "name": "pwr",
   "version": "0.0.1",
   "description": "Power saver mode for Mac",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
     "test": "electron ."
   },

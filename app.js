@@ -1,12 +1,16 @@
 'use strict';
 
+
 /******************************* Initialization *******************************/
+
 // Electron modules
 var electron      = require('electron'),
     app           = electron.app,
     BrowserWindow = electron.BrowserWindow,
     ipc           = electron.ipcMain,
-    dialog        = electron.dialog;
+    dialog        = electron.dialog,
+    Menu          = electron.Menu,
+    Tray          = electron.Tray;
 
 // NPM modules
 var ConfigStore = require('configstore');
@@ -15,6 +19,10 @@ var ConfigStore = require('configstore');
 var bat_watch = require('./battery'),
     utils     = require('./util');
 
+// Battery watch vars
+var disable_wid = null,
+    enabled     = true;
+
 // Persistent configstore
 var defaults  = { apps: [], threshold: 0.30 },
     config    = new ConfigStore(require('./package.json').name, defaults),
@@ -22,23 +30,71 @@ var defaults  = { apps: [], threshold: 0.30 },
     all_apps  = config.get('apps');
 
 // Setup app
-var main_window = null;
+var main_window = null,
+    app_icon    = null;
+
+// Hide dock icon
+app.dock.hide();
 
 app.on('ready', function () {
   main_window = new BrowserWindow({ width: 500, height: 300 });
   main_window.loadURL('file://' + __dirname + '/html/index.html');
+
+  main_window.on('close', function (e) {
+    main_window.hide();
+    e.preventDefault();
+  });
+
+  // Setup menu bar
+  app_icon = new Tray(__dirname + '/assets/menubar_iconTemplate.png');
+  var contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Disable',
+      type:  'checkbox',
+      // accelerator: 'CmdOrCtrl+R',
+      // click: function (item, focusedWindow) {
+      click: function () {
+        enabled = !enabled;
+        bat_watch.set_enabled(enabled);
+      }
+    },
+    {
+      type: 'separator'
+    },
+    {
+      label: 'Settings',
+      click: function () {
+        main_window.show();
+      }
+    },
+    {
+      type: 'separator'
+    },
+    {
+      label: 'Quit',
+      click: function () {
+        main_window.destroy();
+        app.quit();
+      }
+    }
+  ]);
+  app_icon.setToolTip('pwr');
+  app_icon.setContextMenu(contextMenu);
 });
 
-// Setup battery watching
-var main_watch_id = bat_watch.start(function (stats) {
-  if (stats.current * 1.0 / stats.max_cap < threshold) {
+/****************************** Battery Watching ******************************/
+
+var disable_func = function (stats) {
+  // if (stats.current * 1.0 / stats.max_cap < threshold) {
     console.log('stopping:', all_apps);
-    // Commented out because don't wanna quit anything by accident
+    // Commented out because don't wanna quit anything for now
     // all_apps.forEach(function (app_name) {
     //   utils.quit_app(app_name);
     // });
-  }
-});
+  // }
+}
+
+disable_wid = bat_watch.start(disable_func);
 
 /********************************* IPC Events *********************************/
 
