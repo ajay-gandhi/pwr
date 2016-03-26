@@ -111,8 +111,8 @@ var select_apps_dialog = {
   properties: ['openFile', 'multiSelections']
 }
 
-ipc.on('update-percentage', function (event, arg) {
-  threshold = arg;
+ipc.on('update-percentage', function (event, new_threshold) {
+  threshold = new_threshold;
   config.set('threshold', threshold);
 });
 
@@ -135,4 +135,12 @@ ipc.on('select-apps', function (event, arg) {
       // User clicked cancel or didn't choose any apps
     }
   });
+});
+
+ipc.on('remove-apps', function (event, removed) {
+  all_apps = all_apps.filter(function (item) {
+    return removed.indexOf(item) === -1;
+  });
+
+  config.set('apps', all_apps);
 });
