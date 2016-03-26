@@ -2,7 +2,6 @@
 
 var ipc   = require('electron').ipcRenderer,
     utils = require('../util');
-    console.log(utils);
 
 window.jQuery = window.$ = module.exports;
 
@@ -29,7 +28,7 @@ $(document).ready(function () {
 
 ipc.on('selections', function (event, new_apps) {
   // Received app selections
-  all_apps = union(all_apps, new_apps);
+  all_apps = utils.union(all_apps, new_apps);
 
   // List all apps for user
   $('#current-apps').html('');

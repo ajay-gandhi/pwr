@@ -40,6 +40,11 @@ app.on('ready', function () {
   main_window = new BrowserWindow({ width: 500, height: 300 });
   main_window.loadURL('file://' + __dirname + '/html/index.html');
 
+  // Immediately send current list of apps
+  main_window.webContents.on('dom-ready', function () {
+    main_window.webContents.send('selections', config.get('apps'));
+  });
+
   main_window.on('close', function (e) {
     main_window.hide();
     e.preventDefault();
@@ -51,8 +56,6 @@ app.on('ready', function () {
     {
       label: 'Disable',
       type:  'checkbox',
-      // accelerator: 'CmdOrCtrl+R',
-      // click: function (item, focusedWindow) {
       click: function () {
         enabled = !enabled;
         bat_watch.set_enabled(enabled);
