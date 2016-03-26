@@ -1,6 +1,9 @@
+'use strict';
 /**
  * Miscellaneous utilities
  */
+
+var spawn = require('child_process').spawn;
 
 /**
  * Returns the union of two arrays
@@ -14,4 +17,11 @@ module.exports.union = function (x, y) {
     obj[y[i]] = y[i];
 
   return Object.keys(obj);
+}
+
+/**
+ * Quits an app using Applescript
+ */
+module.exports.quit_app = function (app_name) {
+  spawn('osascript', ['-e', 'quit app "' + app_name + '"']);
 }

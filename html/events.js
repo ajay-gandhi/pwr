@@ -1,6 +1,9 @@
+'use strict';
+
 var ipc   = require('electron').ipcRenderer,
     utils = require('../util');
     console.log(utils);
+
 window.jQuery = window.$ = module.exports;
 
 var all_apps = [];

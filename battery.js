@@ -1,5 +1,8 @@
 'use strict';
 
+// Interval for checking battery status in s
+var INTERVAL = 60;
+
 var spawn = require('child_process').spawn;
 
 /******************************* Module Exports *******************************/
@@ -16,7 +19,7 @@ module.exports.stop = function (id) {
 }
 
 /************************************ Core ************************************/
-var watch_battery = spawn(__dirname + '/battery_command.sh', ['5']);
+var watch_battery = spawn(__dirname + '/battery_command.sh', [INTERVAL]);
 var stats = {};
 
 watch_battery.stdout.on('data', function (raw_data) {

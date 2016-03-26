@@ -32,12 +32,17 @@ app.on('ready', function () {
 // Setup battery watching
 var main_watch_id = bat_watch.start(function (stats) {
   if (stats.current * 1.0 / stats.max_cap < threshold) {
-    console.log('stopping:', config.get('apps'));
+    console.log('stopping:', all_apps);
+    // Commented out because don't wanna quit anything by accident
+    // all_apps.forEach(function (app_name) {
+    //   utils.quit_app(app_name);
+    // });
   }
 });
 
 /********************************* IPC Events *********************************/
 
+// Options for dialog box
 var select_apps_dialog = {
   title: 'Select apps to close',
   defaultPath: '/Applications/',
@@ -56,18 +61,19 @@ ipc.on('select-apps', function (event, arg) {
   dialog.showOpenDialog(select_apps_dialog, function (apps) {
     if (apps) {
 
-      // Update local and renderer-side app lists
       apps = apps.map(function (n) {
         return n.split('/').pop().split('.').shift();
       });
 
+      // Update local
       all_apps = utils.union(all_apps, apps);
       config.set('apps', all_apps);
 
+      // Update renderer
       event.sender.send('selections', apps);
 
     } else {
-      // User clicked cancel or didn't choose any
+      // User clicked cancel or didn't choose any apps
     }
   });
 });
