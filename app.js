@@ -1,6 +1,5 @@
 'use strict';
 
-
 /******************************* Initialization *******************************/
 
 // Electron modules
@@ -21,7 +20,6 @@ var bat_watch = require('./battery'),
 
 // Battery watch vars
 var disable_wid  = null,
-    percent_disp = null,
     enabled      = true;
 
 // Persistent configstore
@@ -40,7 +38,7 @@ var main_window = null,
 app.on('ready', function () {
   main_window = new BrowserWindow({
     width: 500,
-    height: 300,
+    height: 400,
     center: true,
     resizable: false,
     type: 'textured'
@@ -56,17 +54,6 @@ app.on('ready', function () {
   main_window.on('close', function (e) {
     main_window.hide();
     e.preventDefault();
-  });
-
-  // Enable, disable battery percentage in UI
-  main_window.on('show', function (e) {
-    percent_disp = bat_watch.start(function (stats) {
-      var val = stats.is_full ? 1.0 : stats.percent;
-      main_window.webContents.send('current-percentage', val);
-    });
-  });
-  main_window.on('hide', function (e) {
-    bat_watch.stop(percent_disp);
   });
 
   // Setup menu bar
@@ -106,14 +93,19 @@ app.on('ready', function () {
 
 /****************************** Battery Watching ******************************/
 
+var stopped_apps = [];
+
 var disable_func = function (stats) {
-  // if (stats.percent < threshold) {
+  if (stats.percent < threshold) {
     console.log('stopping:', all_apps);
     // Commented out because don't wanna quit anything for now
     // all_apps.forEach(function (app_name) {
-    //   utils.quit_app(app_name);
+    //   if (stopped_apps.indexOf(app_name) == -1) {
+    //     utils.quit_app(app_name);
+    //     stopped_apps.push(app_name);
+    //   }
     // });
-  // }
+  }
 }
 
 disable_wid = bat_watch.start(disable_func);
