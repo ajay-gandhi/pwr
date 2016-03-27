@@ -48,6 +48,7 @@ app.on('ready', function () {
 
   // Immediately send current list of apps
   main_window.webContents.on('dom-ready', function () {
+    main_window.webContents.send('current-percentage', config.get('threshold'));
     main_window.webContents.send('selections', config.get('apps'));
   });
 
@@ -81,7 +82,6 @@ app.on('ready', function () {
     },
     {
       label: 'Quit',
-      accelerator: 'Cmd+Q',
       click: function () {
         main_window.destroy();
         app.quit();
