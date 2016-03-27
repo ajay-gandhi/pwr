@@ -39,16 +39,21 @@ $(document).ready(function () {
 
 /********************************* IPC Events *********************************/
 
+// Received app selections
 ipc.on('selections', function (event, new_app_list) {
-  // Received app selections
   all_apps = utils.union(all_apps, new_app_list);
-
   update_local_app_list();
 });
 
-ipc.on('current-percentage', function (event, cur_p) {
-  $('#percentage').val(cur_p * 100);
-  $('#percentage-value').text(cur_p * 100 + '%');
+// Receive current setting for battery threshold
+ipc.on('current-threshold', function (event, curr_th) {
+  $('#percentage').val(curr_th * 100);
+  $('#percentage-value').text(curr_th * 100 + '%');
+});
+
+// Receive current battery power %
+ipc.on('current-percentage', function (event, curr_p) {
+  console.log(curr_p);
 });
 
 /**

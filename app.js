@@ -20,8 +20,9 @@ var bat_watch = require('./battery'),
     utils     = require('./util');
 
 // Battery watch vars
-var disable_wid = null,
-    enabled     = true;
+var disable_wid  = null,
+    percent_disp = null,
+    enabled      = true;
 
 // Persistent configstore
 var defaults  = { apps: [], threshold: 0.30 },
@@ -48,13 +49,24 @@ app.on('ready', function () {
 
   // Immediately send current list of apps
   main_window.webContents.on('dom-ready', function () {
-    main_window.webContents.send('current-percentage', config.get('threshold'));
+    main_window.webContents.send('current-threshold', config.get('threshold'));
     main_window.webContents.send('selections', config.get('apps'));
   });
 
   main_window.on('close', function (e) {
     main_window.hide();
     e.preventDefault();
+  });
+
+  // Enable, disable battery percentage in UI
+  main_window.on('show', function (e) {
+    percent_disp = bat_watch.start(function (stats) {
+      var val = stats.is_full ? 1.0 : stats.percent;
+      main_window.webContents.send('current-percentage', val);
+    });
+  });
+  main_window.on('hide', function (e) {
+    bat_watch.stop(percent_disp);
   });
 
   // Setup menu bar
@@ -104,7 +116,7 @@ var disable_func = function (stats) {
   // }
 }
 
-// disable_wid = bat_watch.start(disable_func);
+disable_wid = bat_watch.start(disable_func);
 
 /********************************* IPC Events *********************************/
 
