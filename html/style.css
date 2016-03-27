@@ -32,7 +32,8 @@ div#left {
 
 div.slider-wrapper {
   width: 100%;
-  padding-left: 78px;
+  padding-top: 26px;
+  padding-left: 85px;
   text-align: center;
 }
 
@@ -50,7 +51,7 @@ div#right {
   position: absolute;
   top: 0;
   right: 0;
-  width: 240px;
+  width: 220px;
   padding-top: 10px;
 }
 
