@@ -15,8 +15,8 @@ $(document).ready(function () {
   });
 
   // Update battery percentage
-  $('#update-percentage').click(function () {
-    ipc.send('update-percentage', $('#percentage').val() / 100);
+  $('#percentage').on('change', function () {
+    ipc.send('update-percentage', $(this).val() / 100.0);
   });
 
   // Open app selection dialog

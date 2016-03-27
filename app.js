@@ -34,7 +34,7 @@ var main_window = null,
     app_icon    = null;
 
 // Hide dock icon
-app.dock.hide();
+// app.dock.hide();
 
 app.on('ready', function () {
   main_window = new BrowserWindow({
@@ -81,6 +81,7 @@ app.on('ready', function () {
     },
     {
       label: 'Quit',
+      accelerator: 'Cmd+Q',
       click: function () {
         main_window.destroy();
         app.quit();
