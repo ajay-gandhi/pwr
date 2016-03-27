@@ -1,0 +1,94 @@
+* {
+  font-family: 'Noto Sans', sans-serif;
+  color: #f2f2f2;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+body {
+  background-color: #333;
+}
+
+h3.section {
+  font-family: 'Futura', sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  text-align: center;
+}
+
+div {
+  /*border: 1px solid red;*/
+}
+
+button {
+  padding: 3px;
+}
+
+/**
+ * Left side
+ */
+div#left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 245px;
+  padding: 10px;
+}
+
+/**
+ * Right side
+ */
+div#right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 245px;
+  padding: 10px;
+}
+
+
+select#current-apps {
+  width: 200px;
+  height: 180px;
+}
+
+/**
+ * Slider styling
+ */
+div.slider-wrapper {
+  /*overflow: hidden;*/
+  width: 60px;
+  height: 155px;
+  background-color: #7ff21c;
+  border: 3px solid #ffffff;
+  border-radius: 13px;
+  box-shadow: inset 0 0 0px 4px #333;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  -webkit-transform: rotate(-90deg);
+  -webkit-transform-origin: top left;
+  margin: 136px 21px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 64px;
+  width: 4px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -7px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background: #7ff21c;
+}

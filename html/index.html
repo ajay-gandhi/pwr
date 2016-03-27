@@ -2,19 +2,30 @@
 <html>
 <head>
   <title>pwr</title>
+  <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script src="events.js"></script>
 </head>
 <body>
-  <label for="percentage">Battery Percentage</label>
-  <input type="range" id="percentage" min="5" value="30" max="100" step="5" />
-  <span id="percentage-value">30%</span>
-  <br />
-  <button id="update-percentage">Save</button>
-  <br /><br />
-  <button id="add-apps">Add Apps</button>
-  <br />
-  <select id="current-apps" multiple></select>
-  <button id="remove-apps">-</button>
+  <div id="left">
+    <h3 class="section">Battery Percentage</h3>
+    <div class="slider-wrapper">
+      <input type="range" id="percentage" min="5" value="30" max="100" step="5" list="tens" />
+      <datalist id="tens">
+        <option>25</option>
+        <option>50</option>
+        <option>75</option>
+      </datalist>
+    </div>
+    <span id="percentage-value">30%</span>
+  </div>
+  <div id="right">
+    <h3 class="section">Apps</h3>
+    <button id="add-apps">Add Apps</button>
+    <br />
+    <select id="current-apps" multiple></select>
+    <button id="remove-apps">Remove Selected</button>
+  </div>
 </body>
 </html>
