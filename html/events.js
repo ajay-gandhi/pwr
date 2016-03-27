@@ -27,13 +27,15 @@ $(document).ready(function () {
   // Remove apps from current list
   $('#remove-apps').click(function () {
     var removed = $('#current-apps').val();
-    ipc.send('remove-apps', removed);
+    if (removed) {
+      ipc.send('remove-apps', removed);
 
-    all_apps = all_apps.filter(function (item) {
-      return removed.indexOf(item) === -1;
-    });
+      all_apps = all_apps.filter(function (item) {
+        return removed.indexOf(item) === -1;
+      });
 
-    update_local_app_list();
+      update_local_app_list();
+    }
   });
 });
 
@@ -49,11 +51,6 @@ ipc.on('selections', function (event, new_app_list) {
 ipc.on('current-threshold', function (event, curr_th) {
   $('#percentage').val(curr_th * 100);
   $('#percentage-value').text(curr_th * 100 + '%');
-});
-
-// Receive current battery power %
-ipc.on('current-percentage', function (event, curr_p) {
-  console.log(curr_p);
 });
 
 /**
