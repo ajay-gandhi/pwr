@@ -46,6 +46,11 @@ ipc.on('selections', function (event, new_app_list) {
   update_local_app_list();
 });
 
+ipc.on('current-percentage', function (event, cur_p) {
+  $('#percentage').val(cur_p * 100);
+  $('#percentage-value').text(cur_p * 100 + '%');
+});
+
 /**
  * Updates the app list in the UI.
  */

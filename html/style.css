@@ -17,10 +17,6 @@ h3.section {
   text-align: center;
 }
 
-div {
-  /*border: 1px solid red;*/
-}
-
 button {
   padding: 3px;
 }
@@ -34,6 +30,13 @@ div#left {
   left: 0;
   width: 245px;
   padding: 10px;
+}
+
+div.slider-wrapper {
+  width: 100%;
+  margin-top: 22px;
+  padding-left: 78px;
+  text-align: center;
 }
 
 div#percentage-value {
@@ -63,8 +66,7 @@ select#current-apps {
 /**
  * Slider styling
  */
-div.slider-wrapper {
-  /*overflow: hidden;*/
+div.slider {
   width: 60px;
   height: 158px;
   background-color: #7ff21c;
