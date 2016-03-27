@@ -11,14 +11,12 @@ body {
 }
 
 h3.section {
+  margin-top: 5px;
+  margin-bottom: 20px;
   font-family: 'Futura', sans-serif;
   font-size: 24px;
   font-weight: normal;
   text-align: center;
-}
-
-button {
-  padding: 3px;
 }
 
 /**
@@ -34,7 +32,6 @@ div#left {
 
 div.slider-wrapper {
   width: 100%;
-  margin-top: 22px;
   padding-left: 78px;
   text-align: center;
 }
@@ -53,19 +50,48 @@ div#right {
   position: absolute;
   top: 0;
   right: 0;
-  width: 245px;
-  padding: 10px;
+  width: 240px;
+  padding-top: 10px;
 }
 
-
 select#current-apps {
+  margin: 20px 0;
   width: 200px;
-  height: 180px;
+  height: 140px;
+  font-size: 14px;
+  background: #333;
+  overflow: auto;
+}
+
+button {
+  padding: 8px;
+  width: 140px;
+  font-size: 13px;
+  background: #333;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+button:hover {
+  background: #444;
+}
+button:active {
+  background: #bbb;
 }
 
 /**
  * Slider styling
  */
+div#battery-node {
+  border: 3px solid #ffffff;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background: #ffffff;
+  margin-left: 25px;
+  width: 10px;
+  height: 3px;
+}
 div.slider {
   width: 60px;
   height: 158px;
@@ -80,10 +106,6 @@ input[type=range] {
   -webkit-transform: rotate(-90deg);
   -webkit-transform-origin: top left;
   margin: 138px 6px;
-}
-
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
 }
 
 input[type=range]::-webkit-slider-thumb {
