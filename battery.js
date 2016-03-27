@@ -1,7 +1,7 @@
 'use strict';
 
 // Interval for checking battery status in s
-var INTERVAL = 5;
+var INTERVAL = 90;
 
 var spawn = require('child_process').spawn;
 

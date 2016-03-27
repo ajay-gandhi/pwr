@@ -38,7 +38,7 @@ var main_window = null,
 app.on('ready', function () {
   main_window = new BrowserWindow({
     width: 500,
-    height: 400,
+    height: 360,
     center: true,
     resizable: false,
     type: 'textured'
@@ -99,12 +99,12 @@ var disable_func = function (stats) {
   if (stats.percent < threshold) {
     console.log('stopping:', all_apps);
     // Commented out because don't wanna quit anything for now
-    // all_apps.forEach(function (app_name) {
-    //   if (stopped_apps.indexOf(app_name) == -1) {
-    //     utils.quit_app(app_name);
-    //     stopped_apps.push(app_name);
-    //   }
-    // });
+    all_apps.forEach(function (app_name) {
+      if (stopped_apps.indexOf(app_name) == -1) {
+        utils.quit_app(app_name);
+        stopped_apps.push(app_name);
+      }
+    });
   }
 }
 
