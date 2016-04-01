@@ -136,7 +136,7 @@ ipc.on('select-apps', function (event, arg) {
       });
 
       // Update local
-      all_apps = utils.union(all_apps, apps);
+      all_apps = utils.union(all_apps, apps).sort(utils.compare_alpha);
       config.set('apps', all_apps);
 
       // Update renderer

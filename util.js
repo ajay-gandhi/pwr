@@ -25,3 +25,14 @@ module.exports.union = function (x, y) {
 module.exports.quit_app = function (app_name) {
   spawn('osascript', ['-e', 'quit app "' + app_name + '"']);
 }
+
+/**
+ * Alphabetic compare function
+ */
+module.exports.compare_alpha= function (a, b) {
+  var x = a.toLowerCase(),
+      y = b.toLowerCase();
+
+  return x < y ? -1 : (x > y ? 1 : 0);
+} 
+
