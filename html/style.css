@@ -63,6 +63,10 @@ select#current-apps {
   background: #333;
   overflow: auto;
 }
+option {
+  margin: 2px 0;
+  padding: 2px 4px;
+}
 
 button {
   padding: 8px;
