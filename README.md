@@ -1,8 +1,24 @@
 # pwr
 
-As of now this is in proof-of-concept mode and I'm too lazy to write docs and
-install instructions (you need `electron-prebuilt` and then `npm install` the
-deps). There's a lot of work to be done, but it's definitely working out :)
+> Save power by quitting apps at low battery
+
+Lol this name thooo...needs work
+
+## Installation
+
+Rn, there's no release so just clone the repo and install dependencies:
+
+```
+$ git clone https://github.com/ajay-gandhi/pwr.git
+$ cd pwr/
+$ npm install
+```
+
+Make sure you have `electron-prebuilt` installed from the NPM repository, then:
+
+```
+$ electron .
+```
 
 ## TODO
 
