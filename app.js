@@ -33,7 +33,7 @@ var main_window = null,
     app_icon    = null;
 
 // Hide dock icon
-// app.dock.hide();
+app.dock.hide();
 
 app.on('ready', function () {
   main_window = new BrowserWindow({

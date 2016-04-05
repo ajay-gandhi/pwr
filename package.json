@@ -13,6 +13,10 @@
   ],
   "author": "Ajay Gandhi",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajay-gandhi/pwr.git"
+  },
   "dependencies": {
     "configstore": "^2.0.0"
   }
