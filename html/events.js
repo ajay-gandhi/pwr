@@ -39,6 +39,13 @@ $(document).ready(function () {
   });
 });
 
+$(document).keydown(function (e) {
+  if (e.metaKey && e.which == 81) {
+    ipc.send('quit-app', true);
+    e.preventDefault();
+    return false;
+  };
+});
 /********************************* IPC Events *********************************/
 
 // Received app selections

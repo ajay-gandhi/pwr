@@ -56,6 +56,10 @@ app.on('ready', function () {
     e.preventDefault();
   });
 
+  main_window.on('app-command', function (e, cmd) {
+    console.log('things are', e, cmd);
+  });
+
   // Setup menu bar
   app_icon = new Tray(__dirname + '/assets/menubar_iconTemplate.png');
   var contextMenu = Menu.buildFromTemplate([
@@ -97,8 +101,6 @@ var stopped_apps = [];
 
 var disable_func = function (stats) {
   if (stats.percent < threshold) {
-    console.log('stopping:', all_apps);
-    // Commented out because don't wanna quit anything for now
     all_apps.forEach(function (app_name) {
       if (stopped_apps.indexOf(app_name) == -1) {
         utils.quit_app(app_name);
@@ -154,4 +156,10 @@ ipc.on('remove-apps', function (event, removed) {
   });
 
   config.set('apps', all_apps);
+});
+
+// User pressed cmd + q in window, so quit app
+ipc.on('quit-app', function (event, should_quit) {
+  main_window.destroy();
+  app.quit();
 });
