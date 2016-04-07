@@ -23,7 +23,7 @@ var disable_wid  = null,
     enabled      = true;
 
 // Persistent configstore
-var defaults  = { apps: [], threshold: 0.30 },
+var defaults  = { apps: [], threshold: 0.30, autostart: true },
     config    = new ConfigStore(require('./package.json').name, defaults),
     threshold = config.get('threshold'),
     all_apps  = config.get('apps');
@@ -45,8 +45,9 @@ app.on('ready', function () {
   });
   main_window.loadURL('file://' + __dirname + '/html/index.html');
 
-  // Immediately send current list of apps
+  // Immediately send settings
   main_window.webContents.on('dom-ready', function () {
+    main_window.webContents.send('autostart', config.get('autostart'));
     main_window.webContents.send('current-threshold', config.get('threshold'));
     main_window.webContents.send('selections', config.get('apps'));
   });
@@ -162,4 +163,10 @@ ipc.on('remove-apps', function (event, removed) {
 ipc.on('quit-app', function (event, should_quit) {
   main_window.destroy();
   app.quit();
+});
+
+// Toggled start on login
+ipc.on('login-start', function (event, should_autostart) {
+  config.set('autostart', should_autostart);
+  utils.autostart(app.getAppPath(), should_autostart);
 });

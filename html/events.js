@@ -37,8 +37,13 @@ $(document).ready(function () {
       update_local_app_list();
     }
   });
+
+  $('#login-start').on('change', function () {
+    ipc.send('login-start', $('#login-start').is(':checked'));
+  });
 });
 
+// Quit app on cmd + q
 $(document).keydown(function (e) {
   if (e.metaKey && e.which == 81) {
     ipc.send('quit-app', true);
@@ -46,9 +51,10 @@ $(document).keydown(function (e) {
     return false;
   };
 });
+
 /********************************* IPC Events *********************************/
 
-// Received app selections
+// Receive app selections
 ipc.on('selections', function (event, new_app_list) {
   all_apps = utils.union(all_apps, new_app_list);
   update_local_app_list();
@@ -58,6 +64,11 @@ ipc.on('selections', function (event, new_app_list) {
 ipc.on('current-threshold', function (event, curr_th) {
   $('#percentage').val(curr_th * 100);
   $('#percentage-value').text(curr_th * 100 + '%');
+});
+
+// Receive current setting for autostart
+ipc.on('autostart', function (event, is_enabled) {
+  $('#login-start').prop('checked', is_enabled);
 });
 
 /**

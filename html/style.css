@@ -32,16 +32,24 @@ div#left {
 
 div.slider-wrapper {
   width: 100%;
-  padding-top: 26px;
   padding-left: 85px;
   text-align: center;
 }
-
 div#percentage-value {
   text-align: right;
   margin-top: 5px;
   font-size: 16px;
   width: 55px;
+}
+
+div.checkbox-wrapper {
+  padding-top: 23px;
+  padding-left: 50px;
+  font-size: 16px;
+}
+div.checkbox-wrapper input {
+  margin-right: 5px;
+  -webkit-transform: translate(0, -1px);
 }
 
 /**

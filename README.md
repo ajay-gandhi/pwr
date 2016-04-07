@@ -31,4 +31,4 @@ $ electron .
 * Quit apps by full path rather than name, maybe
 * Probably want to add the option of multiple thresholds, e.g. close W at X% and
   Y at Z%.
-* Add option for start on login
+* Add option for re-opening apps at higher battery

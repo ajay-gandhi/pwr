@@ -9,13 +9,17 @@
 </head>
 <body>
   <div id="left">
-    <h3 class="section">Battery Percentage</h3>
+    <h3 class="section">Options</h3>
     <div class="slider-wrapper">
       <div id="battery-node">&nbsp;</div>
       <div class="slider">
         <input type="range" id="percentage" min="5" value="30" max="100" step="5" />
       </div>
       <div id="percentage-value">30%</div>
+    </div>
+    <div class="checkbox-wrapper">
+      <input type="checkbox" id="login-start" />
+      <label for="login-start">Start on login</label>
     </div>
   </div>
   <div id="right">
